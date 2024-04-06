@@ -52,10 +52,19 @@
     </div>
 
     <div class="bg-[#00000081] flex justify-center items-center w-full h-full absolute {hiddenButtonAdd}">
-        <div class="bg-white rounded-xl w-[80%] h-[20rem]">
+        <div class="bg-white rounded-xl flex-col w-[80%] h-[20rem]">
             <input placeholder="Titulo" class="text-white h-[2rem] w-[95%] m-2 p-2 rounded-lg font-bold bg-[#7c366c]" type="text">
-            <div class="bg-black rounded-b-lg flex justify-center h-full">
-                <textarea placeholder="Digite seu texto aqui" class="w-full rounded-b-lg resize-none p-2 r" maxlength="400" name="" id=""></textarea>
+            <div class="bg-[#3b1232] rounded-b-lg flex flex-col h-full">
+                <textarea placeholder="Digite seu texto aqui" class="w-full h-[90%] rounded-b-lg resize-none p-2 r" maxlength="400" name="" id=""></textarea>
+                
+                <div class="flex justify-center items-center  h-[20%] gap-8">
+                    <div class="">
+                        <button class="bg-red-400 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Cancelar</button>
+                    </div>
+                    <div class="">
+                        <button class="bg-green-300 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Adicionar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
