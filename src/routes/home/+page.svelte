@@ -7,23 +7,28 @@
 
     let buttonState = false
     let hiddenButton = "hidden"
+    var hiddenButtonAdd = "none"
 
-    const toggleButton = () =>{
+    const toggleButton = (buttong) =>{
         buttonState = !buttonState;
+        console.log("estado:" + buttong)
 
-        if(buttonState){
-            hiddenButton = "none"
+        if(buttong === 'none'){
+            buttong = 'hidden'
         }else{
-            hiddenButton = "hidden"
+            buttong = 'none'
         }
+
+        console.log(buttong)
+
+        return buttong
     }
 
     export let data
     const {notes} = data
 
 </script>
-
-
+    
 
 <div class="flex flex-col items-center">
 
@@ -46,11 +51,20 @@
         {/each}
     </div>
 
-    <button on:click={toggleButton} class="fixed bg-[#D7CDCC] rounded-xl bottom-[4rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110">
+    <div class="bg-[#00000081] flex justify-center items-center w-full h-full absolute {hiddenButtonAdd}">
+        <div class="bg-white rounded-xl w-[80%] h-[20rem]">
+            <input placeholder="Titulo" class="text-white h-[2rem] w-[95%] m-2 p-2 rounded-lg font-bold bg-[#7c366c]" type="text">
+            <div class="bg-black rounded-b-lg flex justify-center h-full">
+                <textarea placeholder="Digite seu texto aqui" class="w-full rounded-b-lg resize-none p-2 r" maxlength="400" name="" id=""></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button on:click={() => hiddenButton = toggleButton(hiddenButton)} class="fixed bg-[#D7CDCC] rounded-xl bottom-[4rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110">
         <img class="w-[3rem] h-[3rem]" src="{editIcon}" alt="">
     </button>
 
-    <button class="fixed bg-green-300 rounded-xl bottom-[8rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
+    <button on:click={() => hiddenButtonAdd = toggleButton(hiddenButtonAdd)} class="fixed bg-green-300 rounded-xl bottom-[8rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
         <img class="w-[3rem] h-[3rem]" src="{addIcon}" alt="">
     </button>
 
