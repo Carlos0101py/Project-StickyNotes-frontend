@@ -5,27 +5,59 @@
     import cancelIcon from "../../lib/img/cancel_icon.svg"
     import addIcon from "../../lib/img/add_icon.svg"
 
+    let title_input = ''
+    let content_input = ''
     let buttonState = false
     let hiddenButton = "hidden"
-    var hiddenButtonAdd = "none"
+    var hiddenButtonAdd = "hidden"
+
+    export var data
+    const {notes} = data
+    let sessionId = data.id
+
+    function updatePage(){
+        location.reload()
+    }
+
+    const sendData = async () => {
+
+        const newNote = {
+            title: title_input,
+            content: content_input,
+            id: sessionId
+        }
+
+        const response = await fetch("http://127.0.0.1:5000/api/add_note",{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newNote)
+        });
+
+        const data = await response.json();
+        console.log("Resposta da API:", data)
+        alert(data['message'])
+
+        updatePage()
+
+        if(!response.ok){
+            throw new Error("Ocorreu um erro ao enviar")
+        }
+    }
 
     const toggleButton = (buttong) =>{
         buttonState = !buttonState;
         console.log("estado:" + buttong)
 
-        if(buttong === 'none'){
-            buttong = 'hidden'
-        }else{
+        if(buttong === 'hidden'){
             buttong = 'none'
+        }else{
+            buttong = 'hidden'
         }
-
-        console.log(buttong)
 
         return buttong
     }
-
-    export let data
-    const {notes} = data
 
 </script>
     
@@ -53,16 +85,16 @@
 
     <div class="bg-[#00000081] flex justify-center items-center w-full h-full absolute {hiddenButtonAdd}">
         <div class="bg-white rounded-xl flex-col w-[80%] h-[20rem]">
-            <input placeholder="Titulo" class="text-white h-[2rem] w-[95%] m-2 p-2 rounded-lg font-bold bg-[#7c366c]" type="text">
+            <input bind:value={title_input} placeholder="Titulo" class="text-white h-[2rem] w-[95%] m-2 p-2 rounded-lg font-bold bg-[#7c366c]" type="text">
             <div class="bg-[#3b1232] rounded-b-lg flex flex-col h-full">
-                <textarea placeholder="Digite seu texto aqui" class="w-full h-[90%] rounded-b-lg resize-none p-2 r" maxlength="400" name="" id=""></textarea>
+                <textarea bind:value={content_input} placeholder="Digite seu texto aqui" class="w-full h-[90%] rounded-b-lg resize-none p-2 r" maxlength="400" name="" id=""></textarea>
                 
                 <div class="flex justify-center items-center  h-[20%] gap-8">
                     <div class="">
                         <button class="bg-red-400 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Cancelar</button>
                     </div>
                     <div class="">
-                        <button class="bg-green-300 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Adicionar</button>
+                        <button on:click={sendData} class="bg-green-300 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Adicionar</button>
                     </div>
                 </div>
             </div>
