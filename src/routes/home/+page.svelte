@@ -5,25 +5,62 @@
     import cancelIcon from "../../lib/img/cancel_icon.svg"
     import addIcon from "../../lib/img/add_icon.svg"
 
+    let title_input = ''
+    let content_input = ''
     let buttonState = false
     let hiddenButton = "hidden"
+    var hiddenButtonAdd = "hidden"
 
-    const toggleButton = () =>{
-        buttonState = !buttonState;
+    export var data
+    const {notes} = data
+    let sessionId = data.id
 
-        if(buttonState){
-            hiddenButton = "none"
-        }else{
-            hiddenButton = "hidden"
+    function updatePage(){
+        location.reload()
+    }
+
+    const sendData = async () => {
+
+        const newNote = {
+            title: title_input,
+            content: content_input,
+            id: sessionId
+        }
+
+        const response = await fetch("http://127.0.0.1:5000/api/add_note",{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newNote)
+        });
+
+        const data = await response.json();
+        console.log("Resposta da API:", data)
+        alert(data['message'])
+
+        updatePage()
+
+        if(!response.ok){
+            throw new Error("Ocorreu um erro ao enviar")
         }
     }
 
-    export let data
-    const {notes} = data
+    const toggleButton = (buttong) =>{
+        buttonState = !buttonState;
+        console.log("estado:" + buttong)
+
+        if(buttong === 'hidden'){
+            buttong = 'none'
+        }else{
+            buttong = 'hidden'
+        }
+
+        return buttong
+    }
 
 </script>
-
-
+    
 
 <div class="flex flex-col items-center">
 
@@ -46,11 +83,29 @@
         {/each}
     </div>
 
-    <button on:click={toggleButton} class="fixed bg-[#D7CDCC] rounded-xl bottom-[4rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110">
+    <div class="bg-[#00000081] flex justify-center items-center w-full h-full absolute {hiddenButtonAdd}">
+        <div class="bg-white rounded-xl flex-col w-[80%] h-[20rem]">
+            <input bind:value={title_input} placeholder="Titulo" class="text-white h-[2rem] w-[95%] m-2 p-2 rounded-lg font-bold bg-[#7c366c]" type="text">
+            <div class="bg-[#3b1232] rounded-b-lg flex flex-col h-full">
+                <textarea bind:value={content_input} placeholder="Digite seu texto aqui" class="w-full h-[90%] rounded-b-lg resize-none p-2 r" maxlength="400" name="" id=""></textarea>
+                
+                <div class="flex justify-center items-center  h-[20%] gap-8">
+                    <div class="">
+                        <button class="bg-red-400 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Cancelar</button>
+                    </div>
+                    <div class="">
+                        <button on:click={sendData} class="bg-green-300 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button on:click={() => hiddenButton = toggleButton(hiddenButton)} class="fixed bg-[#D7CDCC] rounded-xl bottom-[4rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110">
         <img class="w-[3rem] h-[3rem]" src="{editIcon}" alt="">
     </button>
 
-    <button class="fixed bg-green-300 rounded-xl bottom-[8rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
+    <button on:click={() => hiddenButtonAdd = toggleButton(hiddenButtonAdd)} class="fixed bg-green-300 rounded-xl bottom-[8rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
         <img class="w-[3rem] h-[3rem]" src="{addIcon}" alt="">
     </button>
 

@@ -16,6 +16,7 @@ export const load = (async ({ fetch, cookies }) => {
     }
 
     return {
-        notes: await fetchUserNotes()
+        notes: await fetchUserNotes(),
+        id: sessionid
     };
 })

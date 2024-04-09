@@ -10,7 +10,7 @@
         goto("/register")
     }
 
-    const enviarDados = async () =>{
+    const sendData = async () =>{
 
         const userData = {
             username: UserName,
@@ -67,7 +67,7 @@
             </div>
             
             <div class="flex gap-4">
-                <button on:click={enviarDados} class="bg-green-400 h-[3rem] w-[7rem] rounded-lg flex justify-center items-center transition transform hover:ease-out duration-300  hover:scale-90 hover:bg-green-600">Log in</button>
+                <button on:click={sendData} class="bg-green-400 h-[3rem] w-[7rem] rounded-lg flex justify-center items-center transition transform hover:ease-out duration-300  hover:scale-90 hover:bg-green-600">Log in</button>
                 <button on:click={loginButtonClick} class="bg-blue-400 h-[3rem] w-[7rem] rounded-lg flex justify-center items-center transition transform hover:ease-out duration-300 hover:scale-90 hover:bg-blue-600">Sing in</button>
             </div>
         </div>
