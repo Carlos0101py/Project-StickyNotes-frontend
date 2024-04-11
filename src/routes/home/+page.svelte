@@ -6,6 +6,7 @@
     import cancelIcon from "../../lib/img/cancel_icon.svg"
     import cancelIconWhite from "../../lib/img/cancel_white.svg"
     import addIcon from "../../lib/img/add_icon.svg"
+    import githubicon from "../../lib/img/github_icon.png"
 
     let title_input = ''
     let content_input = ''
@@ -138,14 +139,26 @@
 
 <div class="flex flex-col items-center">
 
-    <div class="w-[100%] h-[6rem] flex justify-center items-center">
+    <div class="w-[90%] h-[2rem]mt-2 gap-2">
+        <span class="text-xs font-bold opacity-35">DESENVOLVIDO POR:</span>
+
+        <a href="https://github.com/Carlos0101py">
+            <div class="flex items-center gap-1">
+                <img class="w-[32px] h-[32px]" src="{githubicon}" alt="">
+                <span>Carlos0101py</span>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="w-[100%] h-[6rem] flex justify-center items-center flex-col gap-2">
         <div class="w-[8rem] h-[3rem] flex items-center">
             <img src="{logo}" alt="">
         </div>
     </div>
 
     <div class="w-[95%] bg-gray-200 rounded-xl flex justify-center items-center p-2 md:flex flex-wrap md:gap-4 lg:w-[70%]">
-        
+
         {#each notes as nota}
             <div class="bg-[#ffffff] rounded-xl w-[90%] h-auto mt-5 break-words p-2 transition transform hover:ease-in duration-300 hover:scale-105 md:w-[40%]">
                 <div class="h-[2rem] flex p-1 rounded-lg font-bold bg-[#7c366c]">
@@ -177,7 +190,7 @@
                 
                 <div class="flex justify-center items-center h-[20%] gap-8">
                     <div class="">
-                        <button class="bg-red-400 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Cancelar</button>
+                        <button on:click={() => hiddenButtonAdd = toggleButton(hiddenButtonAdd)} class="bg-red-400 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110">Cancelar</button>
                     </div>
                     <div class="">
                         <button on:click={sendData} class="bg-green-300 h-[2.5rem] w-[5rem] rounded-md transition transform hover:ease-in duration-300 hover:scale-110 {addButton}">Adicionar</button>
@@ -192,11 +205,7 @@
         <img class="w-[3rem] h-[3rem]" src="{editIcon}" alt="">
     </button>
 
-    <button on:click={() =>{ hiddenButtonAdd = toggleButton(hiddenButtonAdd); addButton = ''; sendButton = '' }} class="fixed bg-green-300 rounded-xl bottom-[8rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
+    <button on:click={() =>{ hiddenButtonAdd = toggleButton(hiddenButtonAdd); addButton='none', sendButton = 'hidden'}} class="fixed bg-green-300 rounded-xl bottom-[8rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
         <img class="w-[3rem] h-[3rem]" src="{addIcon}" alt="">
-    </button>
-
-    <button class="fixed bg-red-400 rounded-xl bottom-[12rem] right-[1rem] transition transform hover:ease-in duration-300 hover:scale-110 {hiddenButton}">
-        <img class="w-[3rem] h-[3rem]" src="{cancelIcon}" alt="">
     </button>
 </div>
