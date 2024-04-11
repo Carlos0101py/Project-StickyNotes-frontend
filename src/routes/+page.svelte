@@ -37,7 +37,6 @@
             throw new Error("Dados incorretos!")
         }
 
-
         var a = data['id']
         setCookie('Cookie_Id', a, 1)
 
