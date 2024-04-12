@@ -65,12 +65,12 @@ const enviarDados = async () => {
                 
                 <div class="flex flex-col justify-center">
                     <span class="text-white ml-2">Senha</span>
-                    <input bind:value={password} class="h-8 w-[20rem] rounded-lg pl-2" type="text">
+                    <input bind:value={password} class="h-8 w-[20rem] rounded-lg pl-2" type="password">
                 </div>
 
                 <div class="flex flex-col justify-center">
                     <span class="text-white ml-2">Confirme sua Senha</span>
-                    <input bind:value={rePassword} class="h-8 w-[20rem] rounded-lg pl-2" type="text">
+                    <input bind:value={rePassword} class="h-8 w-[20rem] rounded-lg pl-2" type="password">
                 </div>
             </div>
             
