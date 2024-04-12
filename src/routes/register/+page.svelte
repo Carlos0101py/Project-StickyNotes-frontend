@@ -23,7 +23,7 @@ const enviarDados = async () => {
     };
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/api/add_user", {
+        const response = await fetch("https://anote-54tv.onrender.com/api/add_user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

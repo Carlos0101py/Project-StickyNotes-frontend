@@ -4,7 +4,7 @@ export const load = (async ({ fetch, cookies }) => {
     const sessionid = cookies.get('Cookie_Id');
 
     const fetchUserNotes = async () => {
-        const response = await fetch(`http://localhost:5000/api/get_note?user_id=${sessionid}`, {
+        const response = await fetch(`https://anote-54tv.onrender.com/api/get_note?user_id=${sessionid}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

@@ -48,7 +48,7 @@
             content: content_input
         }
 
-        const response = await fetch("http://127.0.0.1:5000/api/edit_note",{
+        const response = await fetch("https://anote-54tv.onrender.com/api/edit_note",{
             method: "PUT",
             headers:{
                 "Content-Type": "application/json"
@@ -76,7 +76,7 @@
             id: id_note
         }
 
-        const response = await fetch("http://127.0.0.1:5000/api/delete_note",{
+        const response = await fetch("https://anote-54tv.onrender.com/api/delete_note",{
             method: "DELETE",
             headers:{
                 "Content-Type": "application/json"
@@ -103,7 +103,7 @@
             id: sessionId
         }
 
-        const response = await fetch("http://127.0.0.1:5000/api/add_note",{
+        const response = await fetch("https://anote-54tv.onrender.com/api/add_note",{
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
